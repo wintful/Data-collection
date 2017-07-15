@@ -31,9 +31,9 @@
  
 ### 效果图
 
-![项目运行时日志输出界面](http://i.imgur.com/nW0t0RA.jpg)
+![项目运行时日志输出界面](src/main/resources/img/loginfo.jpg)
 
-![图书信息表数据查询](http://i.imgur.com/MkBSKn0.jpg)
+![图书信息表数据查询](src/main/resources/img/bookdata.jpg)
 
 ### 推荐阅读
 

@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.books.dao.BooksMapper">
+    <resultMap id="BaseResultMap" type="com.books.model.Books">
+        <id column="book_id" property="bookId" jdbcType="INTEGER"/>
+        <result column="book_name" property="bookName" jdbcType="VARCHAR"/>
+        <result column="book_image" property="bookImage" jdbcType="VARCHAR"/>
+        <result column="book_synopsis" property="bookSynopsis" jdbcType="VARCHAR"/>
+        <result column="book_price" property="bookPrice" jdbcType="DECIMAL"/>
+        <result column="book_original_price" property="bookOriginalPrice" jdbcType="DECIMAL"/>
+        <result column="book_discount" property="bookDiscount" jdbcType="REAL"/>
+        <result column="book_author" property="bookAuthor" jdbcType="VARCHAR"/>
+        <result column="book_time" property="bookTime" jdbcType="DATE"/>
+        <result column="book_press" property="bookPress" jdbcType="VARCHAR"/>
+        <result column="book_description" property="bookDescription" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+        book_id, book_name, book_image, book_synopsis, book_price, book_original_price, book_discount,
+        book_author, book_time, book_press, book_description
+    </sql>
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.books.model.BooksExample">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from books
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from books
+        where book_id = #{bookId,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectByPriceDesc" resultMap="BaseResultMap">
+        SELECT book_name,book_price FROM books ORDER BY book_price DESC LIMIT 0,20;
+    </select>
+
+    <select id="selectByPriceAsc" resultMap="BaseResultMap">
+        SELECT book_name,book_price FROM books WHERE book_price > 1 ORDER BY book_price ASC LIMIT 0,20;
+    </select>
+
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from books
+        where book_id = #{bookId,jdbcType=INTEGER}
+    </delete>
+    <delete id="deleteByExample" parameterType="com.books.model.BooksExample">
+        delete from books
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.books.model.Books">
+        insert into books (book_id, book_name, book_image,
+        book_synopsis, book_price, book_original_price,
+        book_discount, book_author, book_time,
+        book_press, book_description)
+        values (#{bookId,jdbcType=INTEGER}, #{bookName,jdbcType=VARCHAR}, #{bookImage,jdbcType=VARCHAR},
+        #{bookSynopsis,jdbcType=VARCHAR}, #{bookPrice,jdbcType=DECIMAL}, #{bookOriginalPrice,jdbcType=DECIMAL},
+        #{bookDiscount,jdbcType=REAL}, #{bookAuthor,jdbcType=VARCHAR}, #{bookTime,jdbcType=DATE},
+        #{bookPress,jdbcType=VARCHAR}, #{bookDescription,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.books.model.Books">
+        insert into books
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="bookId != null">
+                book_id,
+            </if>
+            <if test="bookName != null">
+                book_name,
+            </if>
+            <if test="bookImage != null">
+                book_image,
+            </if>
+            <if test="bookSynopsis != null">
+                book_synopsis,
+            </if>
+            <if test="bookPrice != null">
+                book_price,
+            </if>
+            <if test="bookOriginalPrice != null">
+                book_original_price,
+            </if>
+            <if test="bookDiscount != null">
+                book_discount,
+            </if>
+            <if test="bookAuthor != null">
+                book_author,
+            </if>
+            <if test="bookTime != null">
+                book_time,
+            </if>
+            <if test="bookPress != null">
+                book_press,
+            </if>
+            <if test="bookDescription != null">
+                book_description,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="bookId != null">
+                #{bookId,jdbcType=INTEGER},
+            </if>
+            <if test="bookName != null">
+                #{bookName,jdbcType=VARCHAR},
+            </if>
+            <if test="bookImage != null">
+                #{bookImage,jdbcType=VARCHAR},
+            </if>
+            <if test="bookSynopsis != null">
+                #{bookSynopsis,jdbcType=VARCHAR},
+            </if>
+            <if test="bookPrice != null">
+                #{bookPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="bookOriginalPrice != null">
+                #{bookOriginalPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="bookDiscount != null">
+                #{bookDiscount,jdbcType=REAL},
+            </if>
+            <if test="bookAuthor != null">
+                #{bookAuthor,jdbcType=VARCHAR},
+            </if>
+            <if test="bookTime != null">
+                #{bookTime,jdbcType=DATE},
+            </if>
+            <if test="bookPress != null">
+                #{bookPress,jdbcType=VARCHAR},
+            </if>
+            <if test="bookDescription != null">
+                #{bookDescription,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.books.model.BooksExample" resultType="java.lang.Integer">
+        select count(*) from books
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update books
+        <set>
+            <if test="record.bookId != null">
+                book_id = #{record.bookId,jdbcType=INTEGER},
+            </if>
+            <if test="record.bookName != null">
+                book_name = #{record.bookName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.bookImage != null">
+                book_image = #{record.bookImage,jdbcType=VARCHAR},
+            </if>
+            <if test="record.bookSynopsis != null">
+                book_synopsis = #{record.bookSynopsis,jdbcType=VARCHAR},
+            </if>
+            <if test="record.bookPrice != null">
+                book_price = #{record.bookPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="record.bookOriginalPrice != null">
+                book_original_price = #{record.bookOriginalPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="record.bookDiscount != null">
+                book_discount = #{record.bookDiscount,jdbcType=REAL},
+            </if>
+            <if test="record.bookAuthor != null">
+                book_author = #{record.bookAuthor,jdbcType=VARCHAR},
+            </if>
+            <if test="record.bookTime != null">
+                book_time = #{record.bookTime,jdbcType=DATE},
+            </if>
+            <if test="record.bookPress != null">
+                book_press = #{record.bookPress,jdbcType=VARCHAR},
+            </if>
+            <if test="record.bookDescription != null">
+                book_description = #{record.bookDescription,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update books
+        set book_id = #{record.bookId,jdbcType=INTEGER},
+        book_name = #{record.bookName,jdbcType=VARCHAR},
+        book_image = #{record.bookImage,jdbcType=VARCHAR},
+        book_synopsis = #{record.bookSynopsis,jdbcType=VARCHAR},
+        book_price = #{record.bookPrice,jdbcType=DECIMAL},
+        book_original_price = #{record.bookOriginalPrice,jdbcType=DECIMAL},
+        book_discount = #{record.bookDiscount,jdbcType=REAL},
+        book_author = #{record.bookAuthor,jdbcType=VARCHAR},
+        book_time = #{record.bookTime,jdbcType=DATE},
+        book_press = #{record.bookPress,jdbcType=VARCHAR},
+        book_description = #{record.bookDescription,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.books.model.Books">
+        update books
+        <set>
+            <if test="bookName != null">
+                book_name = #{bookName,jdbcType=VARCHAR},
+            </if>
+            <if test="bookImage != null">
+                book_image = #{bookImage,jdbcType=VARCHAR},
+            </if>
+            <if test="bookSynopsis != null">
+                book_synopsis = #{bookSynopsis,jdbcType=VARCHAR},
+            </if>
+            <if test="bookPrice != null">
+                book_price = #{bookPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="bookOriginalPrice != null">
+                book_original_price = #{bookOriginalPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="bookDiscount != null">
+                book_discount = #{bookDiscount,jdbcType=REAL},
+            </if>
+            <if test="bookAuthor != null">
+                book_author = #{bookAuthor,jdbcType=VARCHAR},
+            </if>
+            <if test="bookTime != null">
+                book_time = #{bookTime,jdbcType=DATE},
+            </if>
+            <if test="bookPress != null">
+                book_press = #{bookPress,jdbcType=VARCHAR},
+            </if>
+            <if test="bookDescription != null">
+                book_description = #{bookDescription,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where book_id = #{bookId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.books.model.Books">
+        update books
+        set book_name = #{bookName,jdbcType=VARCHAR},
+        book_image = #{bookImage,jdbcType=VARCHAR},
+        book_synopsis = #{bookSynopsis,jdbcType=VARCHAR},
+        book_price = #{bookPrice,jdbcType=DECIMAL},
+        book_original_price = #{bookOriginalPrice,jdbcType=DECIMAL},
+        book_discount = #{bookDiscount,jdbcType=REAL},
+        book_author = #{bookAuthor,jdbcType=VARCHAR},
+        book_time = #{bookTime,jdbcType=DATE},
+        book_press = #{bookPress,jdbcType=VARCHAR},
+        book_description = #{bookDescription,jdbcType=VARCHAR}
+        where book_id = #{bookId,jdbcType=INTEGER}
+    </update>
+</mapper>

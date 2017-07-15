@@ -36,6 +36,6 @@
 ![图书信息表数据查询](src/main/resources/img/bookdata.jpg)
 
 ### 推荐阅读
+- [WebMagic 中文在线文档](http://webmagic.io/docs/zh/)
+- [MyBatis 中文在线文档](http://www.mybatis.org/mybatis-3/zh/index.html)
 
-<li>[WebMagic 中文在线文档](http://webmagic.io/docs/zh/ )</li>
-<li>[MyBatis 中文在线文档](http://www.mybatis.org/mybatis-3/zh/index.html)</li>

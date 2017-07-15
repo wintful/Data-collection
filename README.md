@@ -22,8 +22,8 @@
 >
  * 此项目是在 JDK 8 环境下使用 IDEA 进行开发，推荐使用 IDEA 进行导入<br/>
  * 使用前请先将 src 下<code>sql</code>目录中的代码放入Mysql 数据库中执行，并修改 src -> main -> resources 中的 mybaits-config.xml 数据库连接相关信息
-<br/>
- * 程序入口是 src -> mian -> java 下的***<code>DangdangRepoPageProcessor</code>*** 类，数据库配置完成之后直接执行<code>main</code> 方法即可
+
+  * 程序入口是 src -> mian -> java 下的<code>DangdangRepoPageProcessor</code> 类，数据库配置完成之后直接执行<code>main</code> 方法即可
  
  * 页面解析是使用 <code>XPath</code> 语法进行关键字抽取，所以会出现部分页面匹配不上的问题，控制台会抛出<code>NullPointerException</code>,不过不用担心，已经做出相的应异常处理，程序不会因为抛出异常而终止。
  

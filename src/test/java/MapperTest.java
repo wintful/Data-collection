@@ -34,7 +34,7 @@ public class MapperTest {
         SqlSession sqlSession = sqlSessionFactory.openSession();
         BooksMapper mapper = sqlSession.getMapper(BooksMapper.class);
         Books books = new Books();
-        books.setBookAuthor("老李");
+        books.setBookAuthor("li");
         books.setBookDiscount(2.8f);
         mapper.insert(books);
         sqlSession.commit();

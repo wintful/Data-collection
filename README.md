@@ -7,14 +7,14 @@
 	dangdangbooks 
 	├── src
 	|    ├── main 
-	|    |	|—— java 
-	|	 |	|	|——com.books.constant 页面解析的全局节点配置
-	|	 |	|	|——com.books.dao --操作数据表方法及映射文件
-	|	 |	|	|——com.books.model -- 数据表对应实体类
-	|	 |	|	|——com.books.services -- 图书数据保存方法定义接口
-	|	 |	|	|	|——com.books.services.impl ---- 图书数据保存方法定义实现类
-	|    |	├── resources -- log4j 及 mybatis配置文件
-	|    |	├── webapp-- 网站前台（暂无页面）
+	|    |    |—— java 
+	|    | 	  |    |——com.books.constant 页面解析的全局节点配置
+	|    |    |    |——com.books.dao --操作数据表方法及映射文件
+	|    |    |    |——com.books.model -- 数据表对应实体类
+	|    |    |    |——com.books.services -- 图书数据保存方法定义接口
+	|    |    |    |——com.books.services.impl ---- 图书数据保存方法定义实现类
+	|    |    ├── resources -- log4j 及 mybatis配置文件
+	|    |    ├── webapp-- 网站前台（暂无页面）
 	|    ├── sql -- Mysql 建表代码 
 	|____├── test -- 测试代码
 	
